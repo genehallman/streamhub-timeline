@@ -48,68 +48,63 @@
         line-height: 1.25;
         background-color: #eee;
     }
-    .hub-item {
-        padding:0;
-        margin: 0;
-        cursor: pointer;
-        width:115px;
-        display:inline-block;
-        vertical-align:bottom;
-        white-space:normal;
-    }
-    
-    .hub-item .item-feed-view {
-    	height:400px;
-    	width:100px;
-    	overflow-y:hidden;
-    	overflow-x:hidden;
-    	position:relative;
-    }
-
-    .hub-item .item-content-view {
-    	height:100px;
-    	width:100px;
-    	overflow:hidden;
-    	background-color:white;
-    	padding:0;
-    	margin:0;
-    	vertical-align:top;
-    }
-
-	.hub-feed-item {
-	   	height:100px;
-    	width:100px;
-    	overflow:hidden;
-    	background-color:white;
-    	padding:0;
-    	margin:0;
-    	vertical-align:top;
-    	position:relative;
-    }
-	.hub-feed-item-holder {
-		max-height:400px;
-		width:115px;
-		position:absolute;
-		bottom:0px;
-		overflow-y:scroll;
-		overflow-x:hidden;
-	}
-    .hub-content {
-    	position:relative;
-    }
-    .hub-heading .hub-timestamp {
-    	float:none;
-    	position:absolute;
-    	bottom:0;
-    	left:0;
-    }
-    
-    .sort-links a, .filter-links a {
-        cursor: pointer;
-        text-decoration: underline;
-    }
     #timelineHolder {
+	    height: 40px;
+		position: relative;
+		top: 25px;
+		width: 100%;
+		min-width: 1280px;
     }
+    #timelineHolder .line-bg {
+		background: #999;
+		height: 3px;
+		position: absolute;
+		top: 11px;
+		width: 100%;
+	}
+	#timelineHolder .events {
+		height: 40px;
+		padding-left: 105px;
+		position: relative;
+		top: 4px;
+	}
+	#timelineHolder ul {
+		margin-left: 40px;
+		position: absolute;
+		top: 0;
+	}
+	#timelineHolder ul li.event-dot {
+		background: #999;
+		-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		-ms-border-radius: 10px;
+		-o-border-radius: 10px;
+		border-radius: 10px;
+		display: inline-block;
+		height: 11px;
+		margin-right: 10px;
+		position: relative;
+		top: -18px;
+		width: 11px;
+	}
+    #timelineHolder ul li.event-dot div.event-desc {
+		background: rgba(255, 255, 255, 0.93);
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		-ms-border-radius: 4px;
+		-o-border-radius: 4px;
+		border-radius: 4px;
+		color: #404040;
+		display: block;
+		font-size: 13px;
+		left: -55px;
+		line-height: 16px;
+		min-width: 100px;
+		padding: 5px 10px;
+		position: relative;
+		text-align: center;
+		top: 25px;
+	}
     </style>
 </head>
 <body>
@@ -126,7 +121,9 @@
   	  <button id='postMessage'>Post</button><br/>
   	  <span id='status'>NA</span>
     </div>
-    <div id="timelineHolder"></div>
+    <div id="timelineHolder">
+    	<div class="line-bg"></div>
+    </div>
   </div>
   
   <script type="text/javascript">
@@ -142,7 +139,7 @@
             });
             
 
-	    	var view = new View({collection: col, el: document.getElementById("example"), feedCollection:feedCol});
+	    	var view = new View({collection: col, el: document.getElementById("timelineHolder")});
 	    	view.render();
 
 		    $('#postMessage').click(function() {
