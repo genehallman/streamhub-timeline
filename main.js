@@ -11,7 +11,7 @@ var TimelineView = Backbone.View.extend(
         this.endDate = opts.startDate || new Date(Math.pow(10,15));
         
         this.collection.on('add', this._insertItem, this);
-        this.collection.on('initialDataLoaded', this.render, this);
+        //this.collection.on('initialDataLoaded', this.render, this);
     },
     className: "hub-TimelineView",
     render: function () {
@@ -43,6 +43,7 @@ TimelineView.prototype._insertItem = function (item, col) {
     itemEl.mouseleave(function() { itemDescEl.fadeOut(); });
     
     this.listEl.append(itemEl);
+    console.log(this.listEl);
     itemEl.fadeIn();
 
     return itemEl;

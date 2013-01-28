@@ -128,7 +128,7 @@
   
   <script type="text/javascript">
 	// Now to load the example
-	require(['streamhub-backbone', 'streamhub-timeline/views/TimelineView',  'jquery'],
+	require(['streamhub-backbone', 'streamhub-timeline',  'jquery'],
 	function(Hub, View, $) {
 	    function loadApp (sdk) {
 
@@ -137,8 +137,13 @@
                 siteId: "303827",
                 articleId: "scoreboard_demo_0"
             });
-            
-
+	    	
+	    	var feedCol = new Hub.Collection().setRemote({
+	    		sdk: sdk,
+                siteId: "303827",
+                articleId: "feed_ticker_0"
+            });
+	    	
 	    	var view = new View({collection: col, el: document.getElementById("timelineHolder")});
 	    	view.render();
 
