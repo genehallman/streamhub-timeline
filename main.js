@@ -11,7 +11,7 @@ var TimelineView = Backbone.View.extend(
         this.endDate = opts.startDate || new Date(Math.pow(10,15));
         
         this.collection.on('add', this._insertItem, this);
-        //this.collection.on('initialDataLoaded', this.render, this);
+        this.render();
     },
     className: "hub-TimelineView",
     render: function () {
