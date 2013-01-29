@@ -43,7 +43,6 @@ TimelineView.prototype._insertItem = function (item, col) {
     itemEl.mouseleave(function() { itemDescEl.fadeOut(); });
     
     this.listEl.append(itemEl);
-    console.log(this.listEl);
     itemEl.fadeIn();
 
     return itemEl;
