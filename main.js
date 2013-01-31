@@ -37,7 +37,7 @@ var TimelineView = Backbone.View.extend(
 TimelineView.prototype._insertItem = function (item, col) {
     var itemEl = $(document.createElement('li'));
     itemEl.addClass('event-dot');
-    itemEl.hide();
+    itemEl.css('opacity', 0);
     
     var itemDescEl = $(document.createElement('div'));
     itemDescEl.addClass('event-desc');
@@ -49,7 +49,7 @@ TimelineView.prototype._insertItem = function (item, col) {
     itemEl.mouseleave(function() { itemDescEl.fadeOut(); });
     
     this.listEl.append(itemEl);
-    itemEl.fadeIn();
+    itemEl.animate({'opacity': 1});
 
     return itemEl;
 };
