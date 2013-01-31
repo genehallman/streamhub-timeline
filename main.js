@@ -10,8 +10,14 @@ var TimelineView = Backbone.View.extend(
         this.startDate = opts.startDate || new Date(0);
         this.endDate = opts.startDate || new Date(Math.pow(10,15));
         
-        this.collection.on('add', this._insertItem, this);
         this.render();
+
+        var self = this;
+        this.collection.each(function(item) {
+        	self._insertItem(item, self.collection);
+        });
+        
+        this.collection.on('add', this._insertItem, this);
     },
     className: "hub-TimelineView",
     render: function () {
