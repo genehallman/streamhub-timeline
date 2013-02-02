@@ -10,6 +10,7 @@ var TimelineView = Backbone.View.extend(
         this.startDate = opts.startDate || new Date(0);
         this.endDate = opts.endDate || new Date(Math.pow(10,15));
         this.metaElement = opts.metaElement;
+        this.onClick = opts.onClick;
         
         this.render();
 
@@ -51,6 +52,7 @@ TimelineView.prototype._insertItem = function (item, col) {
     var itemEl = $(document.createElement('li'));
     itemEl.addClass('event-dot');
     itemEl.css('left', left + '%');
+    itemEl.attr('data-hub-contentid', item.get('id')); 
     
     if (itemMeta['eventType']) {
     	itemEl.attr('data-hub-event-type', itemMeta['eventType']);
@@ -72,6 +74,7 @@ TimelineView.prototype._insertItem = function (item, col) {
     itemEl.append(itemDescEl);
     itemEl.mouseenter(function() { itemDescEl.addClass('visible-event-desc'); });
     itemEl.mouseleave(function() { itemDescEl.removeClass('visible-event-desc'); });
+    itemEl.click(this.onClick);
     
     this.listEl.append(itemEl);
     itemEl.addClass('visible-event-dot');
