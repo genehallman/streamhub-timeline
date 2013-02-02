@@ -47,7 +47,6 @@ TimelineView.prototype._insertItem = function (item, col) {
 	try { itemMeta = JSON.parse(itemMetaEl.text()); } catch (ex) {}    
     
     var left = ((createdAt - this.startDate) / (this.endDate - this.startDate)) * 100;
-    debugger;
     
     var itemEl = $(document.createElement('li'));
     itemEl.addClass('event-dot');
