@@ -16,10 +16,10 @@ require.config({
     location: 'lib/streamhub-backbone'
   },
   {
-	name: "streamhub-ticker",
+	name: "streamhub-timeline",
   	location: "./src"
   },{
-    name: 'streamhub-ticker-tests',
+    name: 'streamhub-timeline-tests',
     location: './tests/'
   }
   ],

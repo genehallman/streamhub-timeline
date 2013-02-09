@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>StreamHub Timeline Example</title>
+    <script src="lib/requirejs/require.js"
+    		data-main="requirejs.conf"
+            type="text/javascript"></script>
+    <script src="http://zor.t402.livefyre.com/wjs/v3.0.sdk/javascripts/livefyre.js"></script>
+    <style>
+    body {
+        color: #222;
+        font: 14px sans-serif;
+        line-height: 1.25;
+        background-color: #eee;
+    }
+    #timelineHolder {
+	    height: 40px;
+		position: relative;
+		top: 25px;
+		width: 100%;
+    }
+    #timelineHolder .line-bg {
+		background: #999;
+		height: 3px;
+		position: absolute;
+		top: 11px;
+		width: 100%;
+	}
+	#timelineHolder .events {
+		padding: 0 10px;
+		position: relative;
+		top: 0px;
+	}
+	#timelineHolder ul {
+		position: absolute;
+		top: 0;
+	}
+	#timelineHolder ul li.event-dot {
+		background: #999;
+		-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		-ms-border-radius: 10px;
+		-o-border-radius: 10px;
+		border-radius: 10px;
+		display: inline-block;
+		height: 11px;
+		margin-right: 10px;
+		position: relative;
+		top: -9px;
+		width: 5px;
+	}
+    #timelineHolder ul li.event-dot div.event-desc {
+		background: rgba(255, 255, 255, 0.93);
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		-ms-border-radius: 4px;
+		-o-border-radius: 4px;
+		border-radius: 4px;
+		color: #404040;
+		display: none;
+		font-size: 13px;
+		left: -105px;
+		line-height: 16px;
+		min-width: 200px;
+		padding: 5px 10px;
+		position: relative;
+		text-align: center;
+		top: 25px;
+	}
+	#timelineHolder ul li.event-dot div.event-desc span {
+		display:block;
+	}
+	#timelineHolder ul li.event-dot:hover div.event-desc {
+		display: block;
+	}
+    </style>
+</head>
+<body>
+  <div id="container">
+    <h3>StreamHub Timeline</h3>
+    <div>
+      User token: <input id='userToken' value='eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9.eyJkb21haW4iOiAibGFicy10NDAyLmZ5cmUuY28iLCAiZXhwaXJlcyI6IDEzNTkzNzM4NDkuNzUyMzY0LCAidXNlcl9pZCI6ICJzeXN0ZW0ifQ.S7uGf48ufOQ9wkwSk-SLlNt8SMJpNPHLFp9X4u4mHUE'></input>
+      Message: <input id='newMessage' /><br/>
+
+  	  <button id='postMessage'>Post</button><br/>
+  	  <span id='status'>NA</span><br/><br/>
+  	  <span id='clickEvent'>Click event...</span>
+    </div>
+    <div id="timelineHolder">
+    	<div class="line-bg"></div>
+    </div>
+  </div>
+  
+  <script type="text/javascript">
+	// Now to load the example
+	require(['streamhub-backbone', 'streamhub-timeline',  'jquery'],
+	function(Hub, View, $) {
+	    function loadApp (sdk) {
+
+	    	var col = window.col = new Hub.Collection().setRemote({
+	    		sdk: sdk,
+                siteId: "303827",
+                articleId: "scoreboard_demo_0"
+            });
+
+	    	var view = new View({
+	    		collection: col,
+	    		el: document.getElementById("timelineHolder"),
+	    		onClick: function(event) {
+	    			alert($(event.currentTarget).text());
+	    		}
+	    	});
+	    	view.render();
+
+		    $('#postMessage').click(function() {
+		    	$('#status').text('Submitting...');
+
+		    	col._sdkCollection.setUserToken($('#userToken').val());
+		    	col._sdkCollection.postContent({bodyHtml: $('#newMessage').val()}, function() {
+		    		$('#status').text('Success: ' + JSON.stringify(arguments));
+		    		$('#newMessage').val('');
+		    	}, function() {
+		    		$('#status').text('Failed: ' + JSON.stringify(arguments));
+		    	});
+		    	return false;
+		    });
+	    }
+
+	    fyre.conv.load({
+	        network: "labs-t402.fyre.co"
+	    }, [{app: 'sdk'}], loadApp);
+	});
+  </script>
+</body>
+</html>

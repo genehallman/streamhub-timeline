@@ -1,9 +1,8 @@
-# streamhub-ticker
+# streamhub-timeline
 
-streamhub-ticker is a StreamHub (Backbone) plugin that visualizes 2 streams as a ticker in X axis, and
-feed views in the Y axis.
+streamhub-timeline is a StreamHub (Backbone) plugin that visualizes a stream as a timeline with clickable events.
 
-![Streamhub-ticker screenshot](https://drive.google.com/uc?id=0BwAX440-rUypRDU5ZVRraFprVHc "Streamhub-ticker screenshot")
+![streamhub-timeline screenshot](https://drive.google.com/uc?id=0BwAX440-rUypR2dLLUJmQnd5SWM "streamhub-timeline screenshot")
 
 Learn more about [StreamHub-Backbone](http://github.com/gobengo/streamhub-backbone)
 
@@ -11,19 +10,17 @@ Learn more about [StreamHub-Backbone](http://github.com/gobengo/streamhub-backbo
 + [npm](http://npmjs.org/)
 
 ## Documentation:
-View the [API documentation](http://htmlpreview.github.com/?https://github.com/genehallman/streamhub-ticker/blob/master/docs/index.html).
+View the [API documentation](http://htmlpreview.github.com/?https://github.com/genehallman/streamhub-timeline/blob/master/docs/index.html).
 
 ### Streamhub Views:
-The streamhub-ticker comes with 2 views for use with Livefyre's Streamhub:
-
-+ `TickerView`: Provides the main construction point for the ticker. Takes content from the stream and displays it on the X axis with newest data on the right. It also animates the addition of new content, by sliding items in from the right.
-+ `FeedTickerView`: Used by the TickerView, instantiated multipled times, this view provides a feed view, specifically for the displaying of the ticker Y axis data.
+The streamhub-timeline comes with ```TimelineView```, a view for use with Livefyre's Streamhub. It adds content items as
+```li``` elements to a ```ul``` with a hover description inside, available for styling, and click event handling.
 
 ## To run the example site:
 
 ```
-$ git clone git@github.com:genehallman/streamhub-ticker.git
-$ cd streamhub-ticker
+$ git clone git@github.com:genehallman/streamhub-timeline.git
+$ cd streamhub-timeline
 $ npm install
 $ npm start
 ```
@@ -33,13 +30,13 @@ $ npm start
 + To see the docs, browse to [localhost:8080/docs/index.html](http://localhost:8080/docs/index.html)
 
 ## To install on your site:
-The easiest way to use the streamhub-ticker is to install it via [bower](http://twitter.github.com/bower/) and [requirejs](http://requirejs.org/):
+The easiest way to use the streamhub-timeline is to install it via [bower](http://twitter.github.com/bower/) and [requirejs](http://requirejs.org/):
 
 #### Install via Bower
-Bower can be used to automatically download streamhub-ticker and its dependency tree.
+Bower can be used to automatically download streamhub-timeline and its dependency tree.
 
 ```
-$ bower install git://github.com/genehallman/streamhub-ticker.git
+$ bower install git://github.com/genehallman/streamhub-timeline.git
 ```
 
 #### Use via Require.js
@@ -61,13 +58,13 @@ Once you've called bower install, you'll have a suite of components available to
   			location: 'components/streamhub-backbone'
   		},
   		{
-  			name: "streamhub-ticker",
-  			location: "components/streamhub-ticker"
+  			name: "streamhub-timeline",
+  			location: "components/streamhub-timeline"
   		}]
   	});
   
   	// Now to load the example
-  	require(['streamhub-backbone', 'streamhub-ticker/views/TickerView'],
+  	require(['streamhub-backbone', 'streamhub-timeline'],
   	function(Hub, View) {
   			fyre.conv.load({network: "network.fyre.co"}, [{app: 'sdk'}], function(sdk) {
   	    	var col = window.col = new Hub.Collection().setRemote({
@@ -76,20 +73,9 @@ Once you've called bower install, you'll have a suite of components available to
   					articleId: "article_1"
   			});
             
-  	    	var feedCol = window.feedCol = new Hub.Collection();
-  
-  	    	col.on('initialDataLoaded', function() {
-  	    		feedCol.setRemote({
-  					sdk: sdk,
-  					siteId: "12345",
-  					articleId: "article_2"
-  				});
-  			}, this);
-  
   			var view = new View({
   				collection: col,
   				el: document.getElementById("example"),
-  				feedCollection:feedCol
   			});
   			view.render();
   		});

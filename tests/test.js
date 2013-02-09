@@ -16,8 +16,7 @@ function (jasmine, jasmineJQuery, $) {
 	};
 
 	var specs = [];
-	specs.push('tests/spec/FeedTickerView');
-	specs.push('tests/spec/TickerView');
+	specs.push('tests/spec/TimelineView');
 
 	$(function(){
 		require(specs, function(){
