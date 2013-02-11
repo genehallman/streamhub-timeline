@@ -61,7 +61,7 @@ Once you've called bower install, you'll have a suite of components available to
         underscore: 'underscore/underscore',
         mustache: 'mustache/mustache',
         isotope: 'isotope/jquery.isotope',
-        fyre: 'http://zor.labs-t402.fyre.co/wjs/v3.0/javascripts/livefyre',
+        fyre: 'http://zor.t402.livefyre.com/wjs/v3.0/javascripts/livefyre',
       },
       packages: [ {
         name: 'streamhub-backbone',
