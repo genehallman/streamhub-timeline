@@ -1,0 +1,61 @@
+.hub-TimelineView {
+    height: 40px;
+	position: relative;
+	top: 25px;
+	width: 100%;
+}
+.hub-TimelineView .line-bg {
+	background: #999;
+	height: 3px;
+	position: absolute;
+	top: 11px;
+	width: 100%;
+}
+.hub-TimelineView .events {
+	padding: 0 10px;
+	position: relative;
+	top: 0px;
+}
+.hub-TimelineView ul {
+	position: absolute;
+	top: 0;
+}
+.hub-TimelineView ul li.event-dot {
+	background: #999;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-ms-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+	display: inline-block;
+	height: 11px;
+	margin-right: 10px;
+	position: relative;
+	top: -9px;
+	width: 5px;
+}
+.hub-TimelineView ul li.event-dot div.event-desc {
+	background: rgba(255, 255, 255, 0.93);
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+	border-radius: 4px;
+	color: #404040;
+	display: none;
+	font-size: 13px;
+	left: -105px;
+	line-height: 16px;
+	min-width: 200px;
+	padding: 5px 10px;
+	position: relative;
+	text-align: center;
+	top: 25px;
+}
+.hub-TimelineView ul li.event-dot div.event-desc span {
+	display:block;
+}
+.hub-TimelineView ul li.event-dot:hover div.event-desc {
+	display: block;
+}
+
