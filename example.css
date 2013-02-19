@@ -8,7 +8,7 @@
 	background: #999;
 	height: 3px;
 	position: absolute;
-	top: 11px;
+	top: 19px;
 	width: 100%;
 }
 .hub-TimelineView .events {
@@ -31,7 +31,7 @@
 	height: 11px;
 	margin-right: 10px;
 	position: relative;
-	top: -9px;
+	top: 10px;
 	width: 5px;
 }
 .hub-TimelineView ul li.event-dot div.event-desc {
