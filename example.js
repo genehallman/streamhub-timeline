@@ -6,16 +6,16 @@ define(function(require) {
         var col = window.col = new Hub.Collection().setRemote({
             sdk: sdk,
             siteId: opts.siteId,
-            articleId: opts.articleId1
+            articleId: opts.articleId3
         });
 
-	var view = new View({
-		collection: col,
-		el: document.getElementById(opts.elementId),
-		onClick: function(event) {
-			alert($(event.currentTarget).text());
-		}
-	});
+		var view = new View({
+			collection: col,
+			el: document.getElementById(opts.elementId),
+			onClick: function(event) {
+				alert($(event.currentTarget).text());
+			}
+		});
 
         view.render();
         
