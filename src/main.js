@@ -46,8 +46,8 @@ var TimelineView = Backbone.View.extend(
      */    
     className: "hub-TimelineView",
     /**
-	 * Renders a TimelineView. Creates a couple of holding html elements, then shows the timeline.
-	 */
+     * Renders a TimelineView. Creates a couple of holding html elements, then shows the timeline.
+     */
     render: function () {
     	var listHolder = $(document.createElement('div'));
     	listHolder.addClass('events');
