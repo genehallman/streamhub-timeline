@@ -17,6 +17,7 @@ var Backbone = require('backbone'),
  * @param {function} opts.onClick An event handler to attach to each event dot.
  */
 var TimelineView = Backbone.View.extend(
+/** @lends TimelineView.prototype */
 {
     initialize: function (opts) {
     	opts = opts || {};
