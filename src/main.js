@@ -40,8 +40,8 @@ var TimelineView = Backbone.View.extend(
 		}
     },
     /**
-     * @property {string} className The css class name that this object will apply to
-     * it's holding element
+     * The css class name that this object will apply to it's holding element
+     * @type {string}
      * @default hub-TimelineView
      */    
     className: "hub-TimelineView",
