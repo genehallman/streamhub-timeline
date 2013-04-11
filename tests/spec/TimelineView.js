@@ -1,9 +1,10 @@
 define([
     'jasmine-jquery',
     'streamhub-timeline',
-    'streamhub-backbone',
-    '../MockHubCollection'],
-function (jasmine, TimelineView, Hub, MockHubCollection) {
+    'streamhub-sdk',
+    'streamhub-sdk/streams',
+    '../MockStream'],
+function (jasmine, TimelineView, Hub, Streams, MockStream) {
 describe('A TimelineView', function () {
     it ("can have tests run", function () {
         expect(true).toBe(true);
@@ -26,24 +27,24 @@ describe('A TimelineView', function () {
         	var view = new TimelineView({});
         	expect(view).toBeDefined();
     	});
-    	it ("with only a Mock Hub.Collection", function () {
+    	it ("with only a Mock Hub.Stream", function () {
         	var view = new TimelineView({
-            	collection: new MockHubCollection()
+            	streams: new Streams({main: new MockStream()})
         	});
     	    expect(view).toBeDefined();
     	});
 	    it ("with an el", function () {
 	        setFixtures('<div id="hub-TimelineView"></div>');  
 	        var view = new TimelineView({
-	            el: $('#hub-TimelineView')
+	            el: $('#hub-TimelineView').get(0)
 	        });
 	        expect(view).toBeDefined();
 	    });
-	    it ("with an el and Mock Hub.Collection", function () {
+	    it ("with an el and Mock Hub.Stream", function () {
 	        setFixtures('<div id="hub-TimelineView"></div>');  
 	        var view = new TimelineView({
-	            collection: new MockHubCollection(),
-	            el: $('#hub-TimelineView')
+	            streams: new Streams({main: new MockStream()}),
+	            el: $('#hub-TimelineView').get(0)
 	        });
 	        expect(view).toBeDefined();
 	    });
@@ -58,45 +59,45 @@ describe('A TimelineView', function () {
 		        '<div id="hub-TimelineView"></div>'
 		    );
 	        view = new TimelineView({
-	            collection: new MockHubCollection(),
-	            el: $('#hub-TimelineView'),
+	            streams: new Streams({main: new MockStream()}),
+	            el: $('#hub-TimelineView').get(0)
 	        });
-	        window.view =view;
+	        window.view = view;
 		});
-        it ("should contain 53 mock items after setRemote", function () {
-            view.collection.setRemote({});
-            expect(view.$el.find('.events ul>li').length).toBe(53);
+        it ("should contain 50 mock items after streams.start()", function () {
+            view.streams.start();
+            expect(view.$el.find('.events ul>li').length).toBe(50);
         });
         it ("should call function pointer on click", function () {
         	var counter = 0;
         	view.onClick = function() {
         		counter++;
         	};
-        	view.collection.setRemote({});
+        	view.streams.start();
         	view.$el.find('.events ul>li').get(20).click();
             expect(counter).toBe(1);
         });
         it ("should filter on start and end dates", function () {
-        	var content = [view.collection._createMockContent(),
-	        	view.collection._createMockContent(),
-	        	view.collection._createMockContent(),
-	        	view.collection._createMockContent(),
-	        	view.collection._createMockContent()];
+        	var content = [view.streams.get('main')._createMockContent(),
+	        	view.streams.get('main')._createMockContent(),
+	        	view.streams.get('main')._createMockContent(),
+	        	view.streams.get('main')._createMockContent(),
+	        	view.streams.get('main')._createMockContent()];
 	        
-        	view.startDate = content[1].get('createdAt') * 1000;
-        	view.endDate = content[3].get('createdAt') * 1000;
+        	view.startDate = content[1].createdAt * 1000;
+        	view.endDate = content[3].createdAt * 1000;
         	for (i in content) {
-        		view.collection.add(content[i]);
+        		view.emit('add', content[i]);
         	}
             expect(view.$el.find('.events ul>li').length).toBe(3);
         });
         it ("should pass extra meta content", function () {
-        	var content = view.collection._createMockContent();
-        	content.set('bodyHtml', '<p>test</p><em>{"eventType":"testType", "eventImportant":"true"}</em>');
+        	var content = view.streams.get('main')._createMockContent();
+        	content.body = '<p>test</p><em>{"eventType":"testType", "eventImportant":"true"}</em>';
 
         	view.metaElement = 'em';
 
-        	view.collection.add(content);
+        	view.emit('add', content);
             expect(view.$el.find('.events ul>li').length).toBe(1);
             expect(view.$el.find('.events ul>li').attr('data-hub-event-type')).toBe('testType');
             expect(view.$el.find('.events ul>li').attr('data-hub-event-important')).toBe('true');

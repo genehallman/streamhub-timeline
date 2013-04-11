@@ -2,10 +2,9 @@
 <html>
 <head>
     <title>StreamHub Timeline Example</title>
-    <script src="lib/requirejs/require.js"
-    		data-main="requirejs.conf"
-            type="text/javascript"></script>
-    <script src="http://zor.t402.livefyre.com/wjs/v3.0.sdk/javascripts/livefyre.js"></script>
+    <script src="lib/requirejs/require.js" type="text/javascript"></script>
+    <script src="requirejs.conf.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="lib/streamhub-sdk/src/css/style.css">
     <style>
     body {
         color: #222;
@@ -31,11 +30,11 @@
 		position: relative;
 		top: 0px;
 	}
-	#timelineHolder ul {
+	#timelineHolder .events > ul {
 		position: absolute;
 		top: 0;
 	}
-	#timelineHolder ul li.event-dot {
+	#timelineHolder .events > ul li.event-dot {
 		background: #999;
 		-webkit-border-radius: 10px;
 		-moz-border-radius: 10px;
@@ -49,30 +48,30 @@
 		top: -9px;
 		width: 5px;
 	}
-    #timelineHolder ul li.event-dot div.event-desc {
-		background: rgba(255, 255, 255, 0.93);
-		-webkit-border-radius: 4px;
-		-moz-border-radius: 4px;
-		-ms-border-radius: 4px;
-		-o-border-radius: 4px;
-		border-radius: 4px;
+    #timelineHolder .events > ul li.event-dot div.event-desc {
 		color: #404040;
 		display: none;
-		font-size: 13px;
 		left: -105px;
-		line-height: 16px;
-		min-width: 200px;
-		padding: 5px 10px;
+		width: 200px;
 		position: relative;
-		text-align: center;
 		top: 25px;
 	}
-	#timelineHolder ul li.event-dot div.event-desc span {
-		display:block;
-	}
-	#timelineHolder ul li.event-dot:hover div.event-desc {
+	#timelineHolder .events > ul li.event-dot:hover div.event-desc {
 		display: block;
 	}
+    
+    /* make streamhub content views have smaller font */
+    .content .content-main {
+        font-size:10px !important;
+        line-height:12px !important;
+    }
+    .content .content-actions {
+        font-size:9px !important;
+        line-height:10px !important;
+    }
+    .content .content-actions img {
+        height:10px;
+    }
     </style>
 </head>
 <body>
@@ -93,42 +92,38 @@
   
   <script type="text/javascript">
 	// Now to load the example
-	require(['streamhub-backbone', 'streamhub-timeline',  'jquery'],
-	function(Hub, View, $) {
-	    function loadApp (sdk) {
+	require(['streamhub-sdk', 'streamhub-timeline',  'jquery'],	function(Hub, View, $) {
 
-	    	var col = window.col = new Hub.Collection().setRemote({
-	    		sdk: sdk,
-                siteId: "303827",
-                articleId: "scoreboard_demo_0"
-            });
+    	var opts = {
+    		network: "labs-t402.fyre.co",
+            siteId: "303827",
+            articleId: "labs_demo_fire", 
+            environment: "t402.livefyre.com"
+        };
 
-	    	var view = new View({
-	    		collection: col,
-	    		el: document.getElementById("timelineHolder"),
-	    		onClick: function(event) {
-	    			alert($(event.currentTarget).text());
-	    		}
+    	var view = new View({
+    		streams: Hub.Streams.forCollection(opts).start(),
+    		el: document.getElementById("timelineHolder")
+    	});
+
+	    $('#postMessage').click(function() {
+	    	$('#status').text('Submitting...');
+
+	    	view.streams.get('main').write({
+	    	    lftoken: $('#userToken').val(),
+	    	    body: $('#newMessage').val(),
+	    	    callback: function(err, data) {
+                    if (err) {
+                        $('#status').text('Failed: ' + JSON.stringify(data));
+                    } else {
+                        $('#status').text('Success: ' + JSON.stringify(data));
+                        $('#newMessage').val('');
+                    }
+                }
 	    	});
-	    	view.render();
-
-		    $('#postMessage').click(function() {
-		    	$('#status').text('Submitting...');
-
-		    	col._sdkCollection.setUserToken($('#userToken').val());
-		    	col._sdkCollection.postContent({bodyHtml: $('#newMessage').val()}, function() {
-		    		$('#status').text('Success: ' + JSON.stringify(arguments));
-		    		$('#newMessage').val('');
-		    	}, function() {
-		    		$('#status').text('Failed: ' + JSON.stringify(arguments));
-		    	});
-		    	return false;
-		    });
-	    }
-
-	    fyre.conv.load({
-	        network: "labs-t402.fyre.co"
-	    }, [{app: 'sdk'}], loadApp);
+	    	
+	    	return false;
+	    });
 	});
   </script>
 </body>
