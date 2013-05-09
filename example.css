@@ -3,7 +3,6 @@
 	position: relative;
 	top: 25px;
 	width: 100%;
-	max-width:800px;
 	overflow: hidden;
 }
 .hub-TimelineView .line-bg {
@@ -23,6 +22,7 @@
 	top: 0;
 	white-space: nowrap;
 	margin-left: 0px;
+	max-width:800px;
 }
 .hub-TimelineView ul li.event-dot {
 	background: #999;
