@@ -3,6 +3,7 @@
 	position: relative;
 	top: 25px;
 	width: 100%;
+	max-width:800px;
 	overflow: hidden;
 }
 .hub-TimelineView .line-bg {
