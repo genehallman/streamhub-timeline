@@ -1,8 +1,9 @@
 .hub-TimelineView {
-    height: 40px;
+	height: 200px;
 	position: relative;
 	top: 25px;
 	width: 100%;
+	overflow: hidden;
 }
 .hub-TimelineView .line-bg {
 	background: #999;
