@@ -19,6 +19,8 @@
 .hub-TimelineView ul {
 	position: absolute;
 	top: 0;
+	white-space: nowrap;
+	margin-left: 0px;
 }
 .hub-TimelineView ul li.event-dot {
 	background: #999;
