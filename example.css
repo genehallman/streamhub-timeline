@@ -51,6 +51,7 @@
 	position: relative;
 	text-align: center;
 	top: 25px;
+	z-index: 9999;
 }
 .hub-TimelineView ul li.event-dot div.event-desc span {
 	display:block;
