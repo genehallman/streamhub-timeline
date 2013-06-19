@@ -6,5 +6,15 @@
   ],
   "dependencies": {
     "streamhub-sdk": "git://github.com/Livefyre/streamhub-sdk.git#~v1.0.1"
+  },
+  "streamhub": {
+    "icon": "https://raw.github.com/genehallman/streamhub-timeline/master/images/timeline-thumbbigHF-302x227.png",
+    "iconHover": "https://raw.github.com/genehallman/streamhub-timeline/master/images/timeline-thumbbigLF-302x227.png",
+    "background": "https://raw.github.com/genehallman/streamhub-timeline/master/images/appgallery-timeline-v2.jpg",
+    "sampleImages": [
+      "https://raw.github.com/genehallman/streamhub-timeline/master/images/timeline-thumbprev-700x525_1.png",
+      "https://raw.github.com/genehallman/streamhub-timeline/master/images/timeline-thumbprev-700x525_2.png",
+      "https://raw.github.com/genehallman/streamhub-timeline/master/images/timeline-thumbprev-700x525_3.png"
+    ]
   }
 }
