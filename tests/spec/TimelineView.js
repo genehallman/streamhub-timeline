@@ -57,11 +57,11 @@ describe('A TimelineView', function () {
 	        	streams.get('main')._createMockContent(),
 	        	streams.get('main')._createMockContent(),
 	        	streams.get('main')._createMockContent()];
-	        
-        	view.startDate = content[1].createdAt * 1000;
-        	view.endDate = content[3].createdAt * 1000;
+
+            view.startDate = content[1].createdAt * 1000;
+            view.endDate = content[3].createdAt * 1000;
         	for (i in content) {
-        		view.emit('add', content[i]);
+                view.add(content[i]);
         	}
             expect(view.$el.find('.events ul>li').length).toBe(3);
         });
@@ -71,7 +71,7 @@ describe('A TimelineView', function () {
 
         	view.metaElement = 'em';
 
-        	view.emit('add', content);
+            view.add(content);
             expect(view.$el.find('.events ul>li').length).toBe(1);
             expect(view.$el.find('.events ul>li').attr('data-hub-event-type')).toBe('testType');
             expect(view.$el.find('.events ul>li').attr('data-hub-event-important')).toBe('true');
