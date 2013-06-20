@@ -1,5 +1,5 @@
 .hub-TimelineView {
-	height: 300px;
+	height: 450px;
 	position: relative;
 	top: 25px;
 	width: 100%;
@@ -64,3 +64,27 @@
 	display: block;
 }
 
+.hub-TimelineView .content .content-actions {
+    margin-left: 0px;
+    position: relative;
+    clear:both;
+}
+.hub-TimelineView .content .content-actions .content-action {
+    display: inline;
+}
+.hub-TimelineView .content .content-actions .content-action span {
+    display: inline;
+}
+.hub-TimelineView .content:hover .content-created-at {
+	display:none !important;
+}
+.hub-TimelineView .content .content-source-logo {
+	top: -18px;
+    position: relative;
+}
+.hub-TimelineView .content .content-main {
+	text-align:left;
+}
+.hub-TimelineView .content .content-body {
+	white-space: normal;
+}
