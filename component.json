@@ -5,7 +5,8 @@
     "./src/main.js"
   ],
   "dependencies": {
-    "streamhub-sdk": "git://github.com/Livefyre/streamhub-sdk.git#~v1.0.1"
+    "streamhub-sdk": "git://github.com/Livefyre/streamhub-sdk.git",
+    "streamhub-zepto": "git://github.com/genehallman/streamhub-zepto.git"
   },
   "streamhub": {
     "icon": "https://raw.github.com/genehallman/streamhub-timeline/master/images/timeline-thumbbigHF-302x227.png",
