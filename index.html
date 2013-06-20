@@ -97,14 +97,15 @@
     	var opts = {
     		network: "labs-t402.fyre.co",
             siteId: "303827",
-            articleId: "labs_demo_fire", 
+            articleId: "sh_col_51_1366914813",
             environment: "t402.livefyre.com"
         };
+        var livefyreStreams = Hub.StreamManager.create.livefyreStreams(opts);
 
     	var view = new View({
-    		streams: Hub.Streams.forCollection(opts).start(),
     		el: document.getElementById("timelineHolder")
     	});
+        livefyreStreams.bind(view).start();
 
 	    $('#postMessage').click(function() {
 	    	$('#status').text('Submitting...');
