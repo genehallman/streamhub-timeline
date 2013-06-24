@@ -1,7 +1,7 @@
 require([
 	'jasmine-html',
 	'jasmine-jquery',
-	'jquery'],
+	'streamhub-sdk/jquery'],
 function (jasmine, jasmineJQuery, $) {
 	// Test!
 	var jasmineEnv = jasmine.getEnv();

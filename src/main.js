@@ -1,5 +1,5 @@
 /** @module TimelineView */
-define(['streamhub-zepto', 'streamhub-sdk/view', 'text!streamhub-timeline/main.css'], function($, View, css) {
+define(['streamhub-sdk/jquery', 'streamhub-sdk/view', 'text!streamhub-timeline/main.css'], function($, View, css) {
 	/**
 	 * TimelineView is a view that uses streamhub data to populate a horizontail timeline.
 	 * It can optionally operate on just a given date range, embed meta content in a specified
